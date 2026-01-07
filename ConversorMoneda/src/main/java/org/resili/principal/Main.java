@@ -14,7 +14,7 @@ public class Main {
 
         while (true) {
             try {
-                System.out.print("""\
+                System.out.print("""
                         Sea bienvenido/a al Conversor de Moneda =]
 
                         1) Dólar => Peso argentino
