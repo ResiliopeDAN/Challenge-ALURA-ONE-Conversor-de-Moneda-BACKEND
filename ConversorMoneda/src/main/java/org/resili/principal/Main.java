@@ -1,4 +1,4 @@
-package org.resili;
+package org.resili.principal;
 
 public class Main {
     public static void main(String[] args) {
