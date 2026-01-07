@@ -5,25 +5,29 @@ Este proyecto es un **Conversor de Monedas** desarrollado en Java como parte del
 
 ## 🚀 Estado Actual del Proyecto
 - [x] **Inicialización del Repositorio:** Estructura base configurada.
-- [x] **Entorno de Desarrollo:** Configurado con **Java 20 (Amazon Corretto)**.
-- [x] **Gestión de Dependencias:** Proyecto inicializado con **Maven**.
-- [x] **Documentación de Contexto:** Se ha establecido un plan de arquitectura basado en el proyecto "Screenmatch" de Alura, integrando el uso de `Records` como DTOs y clases de dominio para la lógica de negocio.
-- [ ] **Configuración de Dependencias (Gson):** Pendiente de inyectar en `pom.xml`.
-- [ ] **Consumo de API:** Pendiente implementación con `HttpClient`.
+- [x] **Entorno de Desarrollo:** Java 20 (Amazon Corretto) + Maven.
+- [x] **Arquitectura:** Estructura de paquetes definida (`modelos`, `servicios`, `principal`) siguiendo el patrón "Screenmatch".
+- [x] **Modelado de Datos:**
+    - `MonedaDTO` (Record): Mapeo exacto de la respuesta JSON.
+    - `Moneda` (Clase): Entidad de dominio con lógica de encapsulamiento.
+- [x] **Capa de Servicios:**
+    - `ConsultaMoneda`: Cliente HTTP nativo implementado.
+    - Integración con **ExchangeRate-API** usando una clave válida.
+    - Parsing de JSON implementado con **Gson**.
+- [ ] **Interfaz de Usuario (CLI):** Pendiente implementación del menú interactivo y flujo de control.
 
 ## 🛠️ Tecnologías y Conceptos Aplicados
-*   **Java 20:** Uso de características modernas como `Records`.
-*   **Maven:** Para la gestión de dependencias y construcción del proyecto.
-*   **Gson (Google):** Biblioteca para la manipulación y parsing de archivos JSON provenientes de la API.
-*   **ExchangeRate-API:** Servicio externo utilizado para obtener las tasas de cambio en tiempo real.
-*   **POO:** Aplicación de encapsulamiento, separación de responsabilidades y patrones de diseño observados durante el curso.
+*   **Java 20:** Uso de `Records` y `HttpClient` nativo.
+*   **Maven:** Gestión de dependencias.
+*   **Gson (Google):** Deserialización de JSON.
+*   **ExchangeRate-API:** Fuente de datos de tasas de cambio.
+*   **POO:** Separación estricta entre DTOs, Entidades y Servicios.
+*   **Manejo de Errores:** Excepciones personalizadas para fallos de red y validación de datos.
 
 ## 📈 Próximos Pasos
-1.  Inyección de la dependencia de **Gson** en el archivo `pom.xml`.
-2.  Creación de la estructura de paquetes: `modelos`, `servicios` y `principal`.
-3.  Implementación del Record `MonedaDTO` y la clase de dominio `Moneda`.
-4.  Desarrollo de la clase de servicio para el consumo de la API mediante `HttpClient`.
-5.  Construcción del menú interactivo para el usuario en la consola.
+1.  Implementar el bucle principal (`Main.java`) con un menú interactivo.
+2.  Agregar la lógica matemática de conversión (Cantidad * Tasa).
+3.  Validar entradas de usuario y finalizar documentación.
 
 ---
 *Este proyecto es parte del aprendizaje continuo en la formación Backend de Alura Latam y Oracle.*
