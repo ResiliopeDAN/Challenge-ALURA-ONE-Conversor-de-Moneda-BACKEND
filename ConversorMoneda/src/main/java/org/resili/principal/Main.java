@@ -11,85 +11,77 @@ public class Main {
     public static void main(String[] args) {
         Scanner lectura = new Scanner(System.in);
         ConsultaMoneda consulta = new ConsultaMoneda();
-        boolean salir = false;
 
-        while (!salir) {
-            System.out.println("\n***************************************************");
-            System.out.println("Sea bienvenido/a al Conversor de Moneda");
-            System.out.println("1) Dólar => Peso Argentino");
-            System.out.println("2) Peso Argentino => Dólar");
-            System.out.println("3) Dólar => Real Brasileño");
-            System.out.println("4) Real Brasileño => Dólar");
-            System.out.println("5) Dólar => Peso Colombiano");
-            System.out.println("6) Peso Colombiano => Dólar");
-            System.out.println("7) Salir");
-            System.out.println("***************************************************");
-            System.out.print("Elija una opción válida: ");
-
-            int opcion;
+        while (true) {
             try {
-                opcion = lectura.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Opción inválida. Ingresa un número del 1 al 7.");
-                lectura.nextLine();
-                continue;
-            }
+                System.out.print("""\
+                        Sea bienvenido/a al Conversor de Moneda =]
 
-            if (opcion == 7) {
-                System.out.println("Gracias por usar el conversor. ¡Hasta pronto!");
-                salir = true;
-                continue;
-            }
+                        1) Dólar => Peso argentino
+                        2) Peso argentino => Dólar
+                        3) Dólar => Real brasileño
+                        4) Real brasileño => Dólar
+                        5) Dólar => Peso colombiano
+                        6) Peso colombiano => Dólar
+                        7) Salir
+                        Elija una opción válida: """);
 
-            String monedaBase;
-            String monedaTarget;
+                int opcion = lectura.nextInt();
 
-            switch (opcion) {
-                case 1:
-                    monedaBase = "USD";
-                    monedaTarget = "ARS";
+                if (opcion == 7) {
+                    System.out.println("Gracias por usar el conversor. ¡Hasta pronto!");
                     break;
-                case 2:
-                    monedaBase = "ARS";
-                    monedaTarget = "USD";
-                    break;
-                case 3:
-                    monedaBase = "USD";
-                    monedaTarget = "BRL";
-                    break;
-                case 4:
-                    monedaBase = "BRL";
-                    monedaTarget = "USD";
-                    break;
-                case 5:
-                    monedaBase = "USD";
-                    monedaTarget = "COP";
-                    break;
-                case 6:
-                    monedaBase = "COP";
-                    monedaTarget = "USD";
-                    break;
-                default:
+                }
+
+                if (opcion < 1 || opcion > 7) {
                     System.out.println("Opción no válida. Intenta nuevamente.");
                     continue;
-            }
+                }
 
-            System.out.print("Ingrese el valor que deseas convertir: ");
-            double cantidad;
-            try {
-                cantidad = lectura.nextDouble();
+                String monedaBase;
+                String monedaDestino;
+
+                switch (opcion) {
+                    case 1:
+                        monedaBase = "USD";
+                        monedaDestino = "ARS";
+                        break;
+                    case 2:
+                        monedaBase = "ARS";
+                        monedaDestino = "USD";
+                        break;
+                    case 3:
+                        monedaBase = "USD";
+                        monedaDestino = "BRL";
+                        break;
+                    case 4:
+                        monedaBase = "BRL";
+                        monedaDestino = "USD";
+                        break;
+                    case 5:
+                        monedaBase = "USD";
+                        monedaDestino = "COP";
+                        break;
+                    case 6:
+                        monedaBase = "COP";
+                        monedaDestino = "USD";
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Intenta nuevamente.");
+                        continue;
+                }
+
+                System.out.print("Ingrese el valor que deseas convertir: ");
+                double monto = lectura.nextDouble();
+
+                MonedaDTO monedaDTO = consulta.buscarMoneda(monedaBase, monedaDestino);
+                Moneda moneda = new Moneda(monedaDTO);
+                double resultado = monto * moneda.getTasaDeConversion();
+                System.out.printf("El valor %.2f %s corresponde al valor final de => %.2f %s%n",
+                        monto, moneda.getCodigoBase(), resultado, moneda.getCodigoDestino());
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Debes ingresar un número.");
-                lectura.nextLine();
-                continue;
-            }
-
-            try {
-                MonedaDTO monedaDTO = consulta.buscarMoneda(monedaBase, monedaTarget);
-                Moneda moneda = new Moneda(monedaDTO);
-                double total = cantidad * moneda.getTasaDeConversion();
-                System.out.printf("El valor %.2f %s corresponde al valor final de => %.2f %s%n",
-                        cantidad, moneda.getCodigoBase(), total, moneda.getCodigoDestino());
+                lectura.next();
             } catch (RuntimeException e) {
                 System.out.println("Error al consultar la tasa de cambio: " + e.getMessage());
             }
