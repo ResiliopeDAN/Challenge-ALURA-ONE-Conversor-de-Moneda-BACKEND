@@ -14,7 +14,7 @@ Este proyecto es un **Conversor de Monedas** desarrollado en Java como parte del
     - `ConsultaMoneda`: Cliente HTTP nativo implementado.
     - Integración con **ExchangeRate-API** usando una clave válida.
     - Parsing de JSON implementado con **Gson**.
-- [ ] **Interfaz de Usuario (CLI):** Pendiente implementación del menú interactivo y flujo de control.
+- [x] **Interfaz de Usuario (CLI):** Menú interactivo y flujo de control implementados.
 
 ## 🛠️ Tecnologías y Conceptos Aplicados
 *   **Java 20:** Uso de `Records` y `HttpClient` nativo.
@@ -28,6 +28,32 @@ Este proyecto es un **Conversor de Monedas** desarrollado en Java como parte del
 1.  Implementar el bucle principal (`Main.java`) con un menú interactivo.
 2.  Agregar la lógica matemática de conversión (Cantidad * Tasa).
 3.  Validar entradas de usuario y finalizar documentación.
+
+## ▶️ Cómo Ejecutar el Proyecto
+1. Compila el proyecto con Maven:
+   ```bash
+   mvn clean install
+   ```
+2. Ejecuta la clase principal desde la terminal:
+   ```bash
+   java -cp target/classes org.resili.principal.Main
+   ```
+
+## 💡 Ejemplo de Uso
+```
+Sea bienvenido/a al Conversor de Moneda =]
+
+1) Dólar => Peso argentino
+2) Peso argentino => Dólar
+3) Dólar => Real brasileño
+4) Real brasileño => Dólar
+5) Dólar => Peso colombiano
+6) Peso colombiano => Dólar
+7) Salir
+Elija una opción válida: 1
+Ingrese el valor que deseas convertir: 50
+El valor 50.00 USD corresponde al valor final de => 13500.00 ARS
+```
 
 ---
 *Este proyecto es parte del aprendizaje continuo en la formación Backend de Alura Latam y Oracle.*
