@@ -23,6 +23,10 @@ public class Moneda {
         return tasaDeConversion;
     }
 
+    public double calcularConversion(double monto) {
+        return monto * tasaDeConversion;
+    }
+
     @Override
     public String toString() {
         return String.format("Tasa de %s a %s: %.4f", codigoBase, codigoDestino, tasaDeConversion);

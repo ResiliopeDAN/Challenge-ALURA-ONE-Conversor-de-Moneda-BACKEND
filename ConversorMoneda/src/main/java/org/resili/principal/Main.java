@@ -76,7 +76,7 @@ public class Main {
 
                 MonedaDTO monedaDTO = consulta.buscarMoneda(monedaBase, monedaDestino);
                 Moneda moneda = new Moneda(monedaDTO);
-                double resultado = monto * moneda.getTasaDeConversion();
+                double resultado = moneda.calcularConversion(monto);
                 System.out.printf("El valor %.2f %s corresponde al valor final de => %.2f %s%n",
                         monto, moneda.getCodigoBase(), resultado, moneda.getCodigoDestino());
             } catch (InputMismatchException e) {
